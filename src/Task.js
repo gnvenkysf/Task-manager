@@ -2,7 +2,8 @@ import './task.css'
 import {useState} from 'react'
 import TaskItem from './TaskItem'
 import EditTask from './EditTask'
-import { doc, updateDoc, deleteDoc} from "firebase/firestore";
+
+import { doc, updateDoc, deleteDoc } from "firebase/firestore";
 import {db} from './firebase'
 
 function Task({id, title, description, completed}) {
@@ -14,17 +15,17 @@ function Task({id, title, description, completed}) {
     setOpen({edit:false, view:false})
   }
 
-  /* function to update firestore */
-  const handleChange = async () => {
-    const taskDocRef = doc(db, 'tasks', id)
-    try{
-      await updateDoc(taskDocRef, {
-        completed: checked
-      })
-    } catch (err) {
-      alert(err)
-    }
-  }
+   /* function to update document in firestore */
+	const handleCheckedChange = async () => {
+		const taskDocRef = doc(db, 'tasks', id)
+		try{
+			await updateDoc(taskDocRef, {
+				completed: checked
+			})
+		} catch (err) {
+			alert(err)
+		}
+	}
 
   /* function to delete a document from firstore */ 
   const handleDelete = async () => {
@@ -43,8 +44,8 @@ function Task({id, title, description, completed}) {
           id={`checkbox-${id}`} 
           className='checkbox-custom'
           name="checkbox" 
-          checked={checked}
-          onChange={handleChange}
+          checked={checked} 
+          onChange={handleCheckedChange}
           type="checkbox" />
         <label 
           htmlFor={`checkbox-${id}`} 
@@ -58,7 +59,7 @@ function Task({id, title, description, completed}) {
           <div className='task__deleteNedit'>
             <button 
               className='task__editButton' 
-              onClick={() => setOpen({...open, edit : true})}>
+              onClick={() => setOpen({...open, edit: true})}>
               Edit
             </button>
             <button className='task__deleteButton' onClick={handleDelete}>Delete</button>
