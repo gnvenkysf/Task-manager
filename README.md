@@ -8,7 +8,10 @@ In the project directory, you can run:
 
 ### `npm install`
 
-This will install React, React hooks and other dep librarie
+This will install React, React hooks and other dep libraries
+
+## 1. npm install firebase
+## 2. npm install react
 
 ### `npm start`
 
